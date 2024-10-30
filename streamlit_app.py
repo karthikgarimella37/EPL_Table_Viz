@@ -22,12 +22,12 @@ from sql_db_details import *
 
 # conn = engine.connect()
 
-username = quote(sql_username)
-password = sql_password
+username = quote(st.secrets["connections"]["postgresql"]["username"])
+password = st.secrets["connections"]["postgresql"]["password"]
 
-host = sql_host
-port = sql_port
-database = sql_database
+host = st.secrets["connections"]["postgresql"]['host']
+port = st.secrets["connections"]["postgresql"]['port']
+database = st.secrets["connections"]["postgresql"]['database']
 
 connection_string = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 
