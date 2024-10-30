@@ -22,3 +22,5 @@ pip-selfcheck.json
 /airflow/extraction/config.py
 /airflow/extraction/__pycache__
 /airflow/dags/__pycache__
+/sql_db_details.py
+/__pycache__
