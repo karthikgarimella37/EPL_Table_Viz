@@ -25,4 +25,4 @@ pip-selfcheck.json
 /sql_db_details.py
 __pycache__
 # /airflow/dags/extraction/__pycache__
-/.devcontainer
+.devcontainer
