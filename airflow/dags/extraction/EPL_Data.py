@@ -1,19 +1,13 @@
 import numpy as np 
 import pandas as pd 
-import matplotlib.pyplot as plt 
 import psycopg2 as psy
 import re
 import requests
-from bs4 import BeautifulSoup
-import seaborn as sns
 import os
 import datetime
 import json
 from urllib.request import urlopen
 from urllib.parse import quote
-# from PIL import Image
-# from highlight_text import fig_text
-# from mplsoccer import Bumpy, FontManager, add_image
 from sqlalchemy import create_engine, text
 from requests_ip_rotator import ApiGateway, EXTRA_REGIONS
 import warnings

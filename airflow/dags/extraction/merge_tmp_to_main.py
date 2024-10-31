@@ -74,7 +74,7 @@ tmp.season,
 '1',
 'Male',
 'Fbref')
-when matched
+when matched and epl.matches_played <> tmp.matches_played
 then update
 set
 league_position = tmp.league_position,

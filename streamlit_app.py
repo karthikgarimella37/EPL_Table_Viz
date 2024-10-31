@@ -16,6 +16,7 @@ import io
 from plottable import ColumnDefinition, Table
 from plottable.cmap import normed_cmap
 from plottable.plots import image
+from sql_db_details import *
 
 # engine = create_engine('postgresql+psycopg2://postgres:Karthik37@localhost:5432/Football')
 

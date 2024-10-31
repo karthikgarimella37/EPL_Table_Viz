@@ -1,0 +1,14 @@
+sqlalchemy
+beautifulsoup4==4.12.3
+bs4==0.0.2 
+matplotlib==3.9.0
+numpy==2.0.1
+psycopg2-binary==2.9.9 
+requests==2.32.3 
+requests_ip_rotator==1.0.14 
+seaborn==0.13.2
+urllib3==1.26.19
+plottable==0.1.5
+streamlit==1.38.0 
+statsbombpy==1.14.0
+lxml==5.3.0

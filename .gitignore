@@ -19,8 +19,10 @@ pip-selfcheck.json
 
 /venv
 /airflow/logs
-/airflow/extraction/config.py
-/airflow/extraction/__pycache__
-/airflow/dags/__pycache__
+/airflow/dags/extraction/config.py
+# /airflow/extraction/__pycache__
+# /airflow/dags/__pycache__
 /sql_db_details.py
-/__pycache__
+__pycache__
+# /airflow/dags/extraction/__pycache__
+/.devcontainer
