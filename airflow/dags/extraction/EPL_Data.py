@@ -40,17 +40,14 @@ database = sql_database
 connection_string = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 engine = create_engine(connection_string)
 
-# engine = create_engine('postgresql+psycopg2://postgres:Karthik37@localhost:5432/Football')
-# conn = engine.connect()
+
 
 with engine.connect() as conn:
     latest_season_sql = conn.execute(text('select max(season) from epl_league_table'))
     latest_season = latest_season_sql.fetchone()[0][0:4]
     
-# with engine.connect() as conn:
-#     conn.execute(text("truncate table epl_league_table_tmp"))
-#     conn.execute(text("truncate table epl_league_table_tmp_no_xg"))
-print(latest_season)
+
+
 # Looping for a set range - incremental load will be done from 2024-25 season
 for i in range(int(latest_season), datetime.datetime.now().year + 1):
     print("Entered Loop")

@@ -1,3 +1,4 @@
+# Libraries
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -16,12 +17,8 @@ import io
 from plottable import ColumnDefinition, Table
 from plottable.cmap import normed_cmap
 from plottable.plots import image
-from sql_db_details import *
 
-# engine = create_engine('postgresql+psycopg2://postgres:Karthik37@localhost:5432/Football')
-
-# conn = engine.connect()
-
+# SQL DB credentials
 username = quote(st.secrets["connections"]["postgresql"]["username"])
 password = st.secrets["connections"]["postgresql"]["password"]
 
@@ -29,21 +26,17 @@ host = st.secrets["connections"]["postgresql"]['host']
 port = st.secrets["connections"]["postgresql"]['port']
 database = st.secrets["connections"]["postgresql"]['database']
 
+# SQL engine creation
 connection_string = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 
 engine = create_engine(connection_string)
 conn = engine.connect()
-# conn = st.connection("postegresql", type = 'sql')
 
 df = conn.execute(text('select * from epl_league_table'))
 df = pd.DataFrame(df)
 
-# df = pd.read_csv('db_data.csv', index_col=False)
-# df = df.drop(columns = ['Unnamed: 0'])
 
 df[['xg', 'xga', 'xgd', 'xgd_per_90']] = df[['xg', 'xga', 'xgd', 'xgd_per_90']].astype(float)
-
-# st.dataframe(df.style.highlight_max(axis=0))
 
 seasons = df['season'].sort_values(ascending = False).unique()
 selected_season = st.selectbox("Select Season", seasons)
@@ -187,6 +180,8 @@ col_defs = [
         cmap=normed_cmap(df["xGD/90"], cmap=matplotlib.cm.PiYG, num_stds=2)
     ),
 ]
+
+# Plotting the table
 fig, ax = plt.subplots(figsize=(22, 30))
 fig.set_facecolor(bg_color)
 ax.set_facecolor(bg_color)
@@ -204,8 +199,6 @@ table = Table(
 ).autoset_fontcolors(colnames=["xG", "xGA", "xGD", "xGD/90"]) # This will set the font color of the columns based on the cmap so the text is readable
 
 table.cells[10, 3].textprops["color"] = "#8ACB88"
-
-# fig.tight_layout()
 
 
 for idx in [0, 1, 2, 3]:
