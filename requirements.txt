@@ -1,5 +1,4 @@
-sqlalchemy==2.0.32
-flask-sqlalchemy==3.1.1
+sqlalchemy
 beautifulsoup4==4.12.3
 bs4==0.0.2 
 matplotlib==3.9.0
@@ -13,3 +12,5 @@ plottable==0.1.5
 streamlit==1.38.0 
 statsbombpy==1.14.0
 lxml==5.3.0
+python-dotenv==1.0.1
+pandas==2.1.4

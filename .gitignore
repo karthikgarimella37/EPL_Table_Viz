@@ -26,3 +26,4 @@ pip-selfcheck.json
 __pycache__
 # /airflow/dags/extraction/__pycache__
 .devcontainer
+/airflow/.env
