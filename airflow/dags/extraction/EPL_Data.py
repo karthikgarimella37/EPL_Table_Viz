@@ -11,13 +11,27 @@ from urllib.parse import quote
 from sqlalchemy import create_engine, text
 from requests_ip_rotator import ApiGateway, EXTRA_REGIONS
 import warnings
-from config import *
+from dotenv import load_dotenv
 
 warnings.filterwarnings('ignore')
 
-os.environ['AWS_ACCESS_KEY_ID'] = aws_access_key_id
-os.environ['AWS_SECRET_ACCESS_KEY'] = aws_secret_access_key
-os.environ['AWS_DEFAULT_REGION'] = aws_default_region
+env_path = os.path.join(os.path.dirname(__file__), '../../.env')
+print(env_path)
+load_dotenv(dotenv_path=env_path)
+
+# AWS Keys
+aws_access_key_id = os.getenv("aws_access_key_id")
+aws_secret_access_key = os.getenv("aws_secret_access_key")
+aws_default_region = os.getenv("aws_default_region")
+
+# SQL DB Keys
+sql_username = os.getenv("sql_username")
+sql_password = os.getenv("sql_password")
+sql_host = os.getenv("sql_host")
+sql_port = os.getenv("sql_port")
+sql_database = os.getenv("sql_database")
+
+
 
 # Initialize the ApiGateway
 gateway = ApiGateway('https://fbref.com/', regions = EXTRA_REGIONS)
@@ -30,21 +44,23 @@ session.mount('https://fbref.com/', gateway)
 df = pd.DataFrame()
 
 
-username = quote(sql_username)
-password = sql_password
+# username = quote(sql_username)
+# password = sql_password
 
-host = sql_host
-port = sql_port
-database = sql_database
+# host = sql_host
+# port = sql_port
+# database = sql_database
 
-connection_string = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
+connection_string = f'postgresql+psycopg2://{sql_username}:{sql_password}@{sql_host}:{sql_port}/{sql_database}'
 engine = create_engine(connection_string)
+print(connection_string)
 
 
 
 with engine.connect() as conn:
     latest_season_sql = conn.execute(text('select max(season) from epl_league_table'))
     latest_season = latest_season_sql.fetchone()[0][0:4]
+    print(latest_season)
     
 
 
@@ -109,7 +125,8 @@ for i in range(int(latest_season), datetime.datetime.now().year + 1):
                 # table_name = 'epl_league_table_tmp' if 'xg' in fbref_table.columns else 'epl_league_table_tmp_no_xg'
                 # fbref_table.to_sql(table_name, conn, if_exists='append', index=False)
                 # print(f"Data for season {i}/{i + 1} appended to {table_name}.")
-
+                print("Engine Connected!")
+                # raw_conn = conn.connection
                 if "xg" in fbref_table.columns:
                     fbref_table.to_sql('epl_league_table_tmp', conn, if_exists = 'append', index = False)
                     print('Data Appened to the tmp table')
