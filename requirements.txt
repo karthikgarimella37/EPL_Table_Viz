@@ -2,7 +2,7 @@ sqlalchemy
 beautifulsoup4==4.12.3
 bs4==0.0.2 
 matplotlib==3.9.0
-numpy==2.0.1
+numpy==1.26.4
 psycopg2-binary==2.9.9 
 requests==2.32.3 
 requests_ip_rotator==1.0.14 
